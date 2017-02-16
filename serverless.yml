@@ -1,0 +1,63 @@
+# Welcome to Serverless!
+#
+# This file is the main config file for your service.
+# It's very minimal at this point and uses default values.
+# You can always add more config options for more control.
+# We've included some commented out config examples here.
+# Just uncomment any of them to get that config option.
+#
+# For full config options, check the docs:
+#    docs.serverless.com
+#
+# Happy Coding!
+
+service: serverless-s3-api
+
+# You can pin your service to only deploy with a specific Serverless version
+# Check out our docs for more details
+# frameworkVersion: "=X.X.X"
+plugins:
+  - serverless-offline
+
+package:
+  exclude:
+    - .DS_Store
+    - .git/**
+    - .idea/**
+    - package.json
+    - README.md
+    - node_modules/chai/**
+    - node_modules/mocha/**
+    - node_modules/serverless/**
+    - node_modules/serverless-offline/**
+    - test/**
+
+provider:
+  name: aws
+  runtime: nodejs4.3
+  region: ap-northeast-1
+  stage: dev
+  cfLogs: true
+  profile: default
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - s3:*
+      Resource: "arn:aws:s3:::*"
+
+functions:
+  getObject:
+    handler: handler.getObject
+    events:
+      - http:
+          path: /{bucket}/{key}
+          method: get
+          cors: true
+
+  putObject:
+    handler: handler.putObject
+    events:
+      - http:
+          path: /{bucket}
+          method: put
+          cors: true

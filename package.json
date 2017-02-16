@@ -1,0 +1,17 @@
+{
+  "name": "serverless-s3-api",
+  "version": "1.0.0",
+  "description": "An Amazon S3 API with Express and Multer-S3",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.12.0"
+  },
+  "devDependencies": {
+    "serverless-offline": "^3.8.3"
+  }
+}
