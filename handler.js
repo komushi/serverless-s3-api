@@ -9,11 +9,27 @@ function makeGetResponse(error, result) {
   return {
     statusCode,
     headers: {
-      "Access-Control-Allow-Origin" : "*",
+      // "Access-Control-Allow-Origin" : "*",
       "Content-Type": "application/pdf"
     },
     isBase64Encoded: true,
     body: result.toString("base64")
+  }
+}
+
+function makeGetResponse1(error, result) {
+  console.log("result.length:" + result.length);
+  const statusCode = error && error.statusCode || 200
+  return {
+    statusCode,
+    headers: {
+      "Access-Control-Allow-Origin" : "*",
+      "Content-Type": "application/octet-stream",
+      "Content-Transfer-Encoding": "binary",
+      'Content-Length': result.length
+    },
+    isBase64Encoded: false,
+    body: result
   }
 }
 
@@ -22,7 +38,7 @@ function makeResponse(error, result) {
   return {
     statusCode,
     headers: {
-      "Access-Control-Allow-Origin" : "*",
+      // "Access-Control-Allow-Origin" : "*",
       "Content-Type": "application/json"
     },
     body: result

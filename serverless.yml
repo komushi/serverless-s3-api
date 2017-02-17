@@ -26,10 +26,7 @@ package:
     - .idea/**
     - package.json
     - README.md
-    - node_modules/chai/**
-    - node_modules/mocha/**
-    - node_modules/serverless/**
-    - node_modules/serverless-offline/**
+    - node_modules/**
     - test/**
 
 provider:
@@ -52,7 +49,6 @@ functions:
       - http:
           path: /{bucket}/{key}
           method: get
-          cors: true
 
   putObject:
     handler: handler.putObject
@@ -60,4 +56,3 @@ functions:
       - http:
           path: /{bucket}
           method: put
-          cors: true

@@ -1,6 +1,5 @@
 const AWS = require('aws-sdk');
 const S3 = new AWS.S3();
-const fs = require("fs");
 
 
 module.exports = (event, callback) => {
@@ -10,12 +9,16 @@ module.exports = (event, callback) => {
 			Key: event.pathParameters.key
 		};
 
-
   S3.getObject(params).promise().then((result) => {
+    console.log('get-object done');
+    console.log('result.Body');
     callback(null, result.Body);
   }).catch(function(reason) {
+		console.log('get-object error');
+  	console.log(reason);
 		callback(reason, null);
 	});
+
 
 //alternatives
 /* 
