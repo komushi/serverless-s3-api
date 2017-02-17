@@ -11,11 +11,10 @@ module.exports = (event, callback) => {
 
   S3.getObject(params).promise().then((result) => {
     console.log('get-object done');
-    console.log('result.Body');
     callback(null, result.Body);
   }).catch(function(reason) {
 		console.log('get-object error');
-  	console.log(reason);
+  	console.log(JSON.stringify(reason));
 		callback(reason, null);
 	});
 

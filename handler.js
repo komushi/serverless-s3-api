@@ -5,36 +5,23 @@ const putObject = require('./handlers/put-object.js');
 
 
 function makeGetResponse(error, result) {
-  const statusCode = error && error.statusCode || 200
+  const statusCode = error && error.statusCode || 200;
+
+  var str = result || '';
+
   return {
     statusCode,
     headers: {
       // "Access-Control-Allow-Origin" : "*",
-      "Content-Type": "application/pdf"
+      "Content-Type": "application/octet-stream"
     },
     isBase64Encoded: true,
-    body: result.toString("base64")
-  }
-}
-
-function makeGetResponse1(error, result) {
-  console.log("result.length:" + result.length);
-  const statusCode = error && error.statusCode || 200
-  return {
-    statusCode,
-    headers: {
-      "Access-Control-Allow-Origin" : "*",
-      "Content-Type": "application/octet-stream",
-      "Content-Transfer-Encoding": "binary",
-      'Content-Length': result.length
-    },
-    isBase64Encoded: false,
-    body: result
+    body: str.toString("base64")
   }
 }
 
 function makeResponse(error, result) {
-  const statusCode = error && error.statusCode || 200
+  const statusCode = error && error.statusCode || 200;
   return {
     statusCode,
     headers: {
