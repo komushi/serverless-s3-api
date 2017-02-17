@@ -26,9 +26,6 @@ curl -v -H "Content-Type:application/octet-stream" -X PUT -F "file=@<localfile_p
 $ curl -v -X PUT -F "file=@data/doc.pdf" localhost:3000/training-sally
 
 $ curl -v -H "Content-Type:application/octet-stream" -X PUT -F "file=@data/doc.pdf" localhost:3000/training-sally
-
-curl -v -H "Content-Type:application/octet-stream" -H "Content-Transfer-Encoding:base64" -X PUT -F "file=@data/doc.pdf" localhost:3000/training-sally
-
 ```
 
 ## 3. AWS Deployment & Test
@@ -44,11 +41,10 @@ $ curl -H "Accept: application/pdf" https://p28xmrsz9k.execute-api.ap-northeast-
 ```
 
 ### 3-3. Upload to S3
-curl -v -X PUT -F "file=@<localfile_path>" localhost:3000/<bucket>
+curl -v -X PUT --data-binary "@<localfile_path>" https://<api_gateway_path>/dev/training-sally<bucket>
 ```
-$ curl -v -X PUT -F "file=@data/doc.pdf" https://p28xmrsz9k.execute-api.ap-northeast-1.amazonaws.com/dev/training-sally
+$ curl -v -H "Content-Type:application/pdf" -X PUT --data-binary "@./data/doc.pdf" https://p28xmrsz9k.execute-api.ap-northeast-1.amazonaws.com/dev/training-sally
 
-curl -v -H "Content-Type:application/pdf" -X PUT -F "file=@data/doc.pdf" https://p28xmrsz9k.execute-api.ap-northeast-1.amazonaws.com/dev/training-sally
+$ curl -v -X PUT --data-binary "@./data/doc.pdf" https://p28xmrsz9k.execute-api.ap-northeast-1.amazonaws.com/dev/training-sally
 
-curl -v -H "Content-Type:application/pdf" -X PUT --data-binary "@./data/doc.pdf" https://p28xmrsz9k.execute-api.ap-northeast-1.amazonaws.com/dev/training-sally
 ```
