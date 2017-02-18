@@ -23,12 +23,14 @@ plugins:
 package:
   exclude:
     - .DS_Store
+    - .gitignore
+    - .npmignore
     - .git/**
     - .idea/**
+    - node_modules/**
+    - data/**
     - package.json
     - README.md
-    - node_modules/**
-    - test/**
 
 provider:
   name: aws
@@ -57,3 +59,10 @@ functions:
       - http:
           path: /{bucket}
           method: put
+
+  postObject:
+    handler: handler.postObject
+    events:
+      - http:
+          path: /{bucket}/{key}
+          method: post

@@ -29,21 +29,30 @@ npm install -g serverless
 $ sls offline
 ```
 
-### 2-2. Download from S3
-curl -H "Accept: application/octet-stream" http://localhost:3000/<bucket>/<key> | openssl base64 -A -d > <localfile_path>
+### 2-2. GET from S3
+curl -v -H "Accept: application/octet-stream" http://localhost:3000/<bucket>/<key> | openssl base64 -A -d > <localfile_path>
 ```
-$ curl -H "Accept: application/octet-stream" http://localhost:3000/training-sally/1487366163793 | openssl base64 -A -d > test.pdf
+$ curl -v -H "Accept: application/octet-stream" http://localhost:3000/training-sally/1487366163793 | openssl base64 -A -d > test.pdf
 
-$ curl -H "Accept: application/octet-stream" http://localhost:3000/training-sally/1487369499363 | openssl base64 -A -d > test.zip
+$ curl -v -H "Accept: application/octet-stream" http://localhost:3000/training-sally/1487369499363 | openssl base64 -A -d > test.zip
 ```
 
-### 2-3. Upload to S3
+### 2-3. PUT to S3
 curl -v -H "Content-Type:application/octet-stream" -X PUT --data-binary "@<localfile_path>" localhost:3000/<bucket>
 ```
 $ curl -v -H "Content-Type:application/octet-stream" -X PUT --data-binary "@./data/doc.pdf" localhost:3000/training-sally
 
 $ curl -v -H "Content-Type:application/octet-stream" -X PUT --data-binary "@./data/test.pdf.zip" localhost:3000/training-sally
 ```
+
+### 2-4. POST to S3
+curl -v -H "Content-Type:application/octet-stream" -X POST --data-binary "@<localfile_path>" localhost:3000/<bucket>/<key>
+```
+$ curl -v -H "Content-Type:application/octet-stream" -X POST --data-binary "@./data/doc.pdf" localhost:3000/training-sally/doc.pdf
+
+$ curl -v -H "Content-Type:application/octet-stream" -X POST --data-binary "@./data/test.pdf.zip" localhost:3000/training-sally/test.pdf.zip
+```
+
 
 ## 3. AWS Deployment & Test
 ### 3-1. deploy to AWS
@@ -53,17 +62,26 @@ Need to add Binary support and re-deploy!
 * Add */* as a media type under the Binary Support section of this API.
 * ```$ sls deploy```
 
-### 3-2. Download from S3
-*```$ curl -H "Accept: application/pdf" https://p28xmrsz9k.execute-api.ap-northeast-1.amazonaws.com/dev/training-sally/1487366163793 -o 1487350952348.pdf```
+### 3-2. GET from S3
+*```$ curl -v -H "Accept: application/octet-stream" https://p28xmrsz9k.execute-api.ap-northeast-1.amazonaws.com/dev/training-sally/1487366163793 -o 1487350952348.pdf```
 * Or paste the url in browser directly.
 
-### 3-3. Upload to S3
-curl -v -H "Content-Type:application/octet-stream" -X PUT --data-binary "@<localfile_path>" https://<api_gateway_path>/dev/training-sally<bucket>
+### 3-3. PUT to S3
+curl -v -H "Content-Type:application/octet-stream" -X PUT --data-binary "@<localfile_path>" https://<api_gateway_path>/dev/<bucket>
 ```
 $ curl -v -H "Content-Type:application/octet-stream" -X PUT --data-binary "@./data/doc.pdf" https://p28xmrsz9k.execute-api.ap-northeast-1.amazonaws.com/dev/training-sally
 
 $ curl -v -H "Content-Type:application/octet-stream" -X PUT --data-binary "@./data/test.pdf.zip" https://p28xmrsz9k.execute-api.ap-northeast-1.amazonaws.com/dev/training-sally
 ```
+
+### 2-4. POST to S3
+curl -v -H "Content-Type:application/octet-stream" -X POST --data-binary "@<localfile_path>" <api_gateway_path>/dev/<bucket>/<key>
+```
+$ curl -v -H "Content-Type:application/octet-stream" -X POST --data-binary "@./data/doc.pdf" https://p28xmrsz9k.execute-api.ap-northeast-1.amazonaws.com/dev/training-sally/doc.pdf
+
+$ curl -v -H "Content-Type:application/octet-stream" -X POST --data-binary "@./data/test.pdf.zip" https://p28xmrsz9k.execute-api.ap-northeast-1.amazonaws.com/dev/training-sally/test.pdf.zip
+```
+
 
 # TODO:
 * 1. Upgrade to future serverless-offline plugin for offline mode's Binary Support.
