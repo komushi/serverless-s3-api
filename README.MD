@@ -63,27 +63,28 @@ Need to add Binary support and re-deploy!
 * ```$ sls deploy```
 
 ### 3-2. GET from S3
-*```$ curl -v -H "Accept: application/octet-stream" https://p28xmrsz9k.execute-api.ap-northeast-1.amazonaws.com/dev/training-sally/1487366163793 -o 1487350952348.pdf```
+*```$ curl -v -H "Accept: application/octet-stream" https://w6jseteeib.execute-api.ap-northeast-1.amazonaws.com/dev/training-sally/doc.pdf -o 1487350952348.pdf```
 * Or paste the url in browser directly.
 
 ### 3-3. PUT to S3
 curl -v -H "Content-Type:application/octet-stream" -X PUT --data-binary "@<localfile_path>" https://<api_gateway_path>/dev/<bucket>
 ```
-$ curl -v -H "Content-Type:application/octet-stream" -X PUT --data-binary "@./data/doc.pdf" https://p28xmrsz9k.execute-api.ap-northeast-1.amazonaws.com/dev/training-sally
+$ curl -v -H "Content-Type:application/octet-stream" -X PUT --data-binary "@./data/doc.pdf" https://w6jseteeib.execute-api.ap-northeast-1.amazonaws.com/dev/training-sally
 
-$ curl -v -H "Content-Type:application/octet-stream" -X PUT --data-binary "@./data/test.pdf.zip" https://p28xmrsz9k.execute-api.ap-northeast-1.amazonaws.com/dev/training-sally
+$ curl -v -H "Content-Type:application/octet-stream" -X PUT --data-binary "@./data/test.pdf.zip" https://w6jseteeib.execute-api.ap-northeast-1.amazonaws.com/dev/training-sally
 ```
 
 ### 2-4. POST to S3
 curl -v -H "Content-Type:application/octet-stream" -X POST --data-binary "@<localfile_path>" <api_gateway_path>/dev/<bucket>/<key>
 ```
-$ curl -v -H "Content-Type:application/octet-stream" -X POST --data-binary "@./data/doc.pdf" https://p28xmrsz9k.execute-api.ap-northeast-1.amazonaws.com/dev/training-sally/doc.pdf
+$ curl -v -H "Content-Type:application/octet-stream" -X POST --data-binary "@./data/doc.pdf" https://w6jseteeib.execute-api.ap-northeast-1.amazonaws.com/dev/training-sally/doc.pdf
 
-$ curl -v -H "Content-Type:application/octet-stream" -X POST --data-binary "@./data/test.pdf.zip" https://p28xmrsz9k.execute-api.ap-northeast-1.amazonaws.com/dev/training-sally/test.pdf.zip
+$ curl -v -H "Content-Type:application/octet-stream" -X POST --data-binary "@./data/test.pdf.zip" https://w6jseteeib.execute-api.ap-northeast-1.amazonaws.com/dev/training-sally/test.pdf.zip
+
 ```
 
 
 # TODO:
 * 1. Upgrade to future serverless-offline plugin for offline mode's Binary Support.
-* 2. POST mode for multipart upload.
+* 2. PUT mode for multipart upload.
 * 3. Check how to specify metadata like file name.

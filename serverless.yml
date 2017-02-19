@@ -36,6 +36,7 @@ provider:
   name: aws
   runtime: nodejs4.3
   region: ap-northeast-1
+  # region: us-west-1
   stage: dev
   cfLogs: true
   profile: default
@@ -59,6 +60,7 @@ functions:
       - http:
           path: /{bucket}
           method: put
+          cors: true
 
   postObject:
     handler: handler.postObject

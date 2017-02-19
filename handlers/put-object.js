@@ -76,7 +76,7 @@ module.exports = (event, callback) => {
     };
 
   S3.putObject(params).promise().then(() => {
-    callback(null, {key: key});
+    callback(null, JSON.stringify({key: key}));
   }).catch(function(reason) {
    callback(JSON.stringify(reason));
   });

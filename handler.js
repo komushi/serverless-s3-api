@@ -26,7 +26,7 @@ function makeResponse(error, result) {
   return {
     statusCode,
     headers: {
-      // "Access-Control-Allow-Origin" : "*",
+      "Access-Control-Allow-Origin" : "*",
       "Content-Type": "application/json"
     },
     body: result
@@ -50,6 +50,8 @@ module.exports.putObject = (event, context, callback) => {
 module.exports.postObject = (event, context, callback) => {
   postObject(event, (error, result) => {
     const response = makeResponse(error, result)
+    console.log("makeResponse!!!");
+    console.log(response);
     context.succeed(response)
   });
 };

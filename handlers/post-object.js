@@ -3,7 +3,7 @@ const S3 = new AWS.S3();
 
 // works with offline mode & aws mode
 module.exports = (event, callback) => {
-  console.log("event!!");
+  console.log("post event!!");
   console.log(event);
 
   var parseResult = safelyParseJSON(event.body);
@@ -23,9 +23,12 @@ module.exports = (event, callback) => {
     };
 
   S3.putObject(params).promise().then(() => {
-    callback(null, {key: event.pathParameters.key});
+    console.log("postobject ok");
+    callback(null, JSON.stringify({key: event.pathParameters.key}));
   }).catch(function(reason) {
-   callback(JSON.stringify(reason));
+    console.log("postobject ng");
+    console.log(reason);
+    callback(JSON.stringify(reason));
   });
 }
 
