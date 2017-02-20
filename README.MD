@@ -67,7 +67,7 @@ Need to add Binary support and re-deploy!
 * ```$ sls deploy```
 
 ### 3-2. GET from S3
-* ```$ curl -v -H "Accept: application/octet-stream" https://w6jseteeib.execute-api.ap-northeast-1.amazonaws.com/dev/training-sally/doc.pdf -o 1487350952348.pdf```
+* ```$ curl -v -H "Accept: application/octet-stream" https://z4bf9rzv53.execute-api.ap-northeast-1.amazonaws.com/dev/training-sally/doc.pdf -o 1487350952348.pdf```
 * Or paste the url in browser directly.
 
 ### 3-3. PUT to S3
@@ -76,21 +76,24 @@ $ curl -v -H "Content-Type:application/octet-stream" -X PUT --data-binary "@<loc
 ```
 
 ```
-$ curl -v -H "Content-Type:application/octet-stream" -X PUT --data-binary "@./data/doc.pdf" https://w6jseteeib.execute-api.ap-northeast-1.amazonaws.com/dev/training-sally
+$ curl -v -H "Content-Type:application/octet-stream" -X PUT --data-binary "@./data/doc.pdf" https://z4bf9rzv53.execute-api.ap-northeast-1.amazonaws.com/dev/training-sally
 
-$ curl -v -H "Content-Type:application/octet-stream" -X PUT --data-binary "@./data/test.pdf.zip" https://w6jseteeib.execute-api.ap-northeast-1.amazonaws.com/dev/training-sally
+$ curl -v -H "Content-Type:application/octet-stream" -X PUT --data-binary "@./data/test.pdf.zip" https://z4bf9rzv53.execute-api.ap-northeast-1.amazonaws.com/dev/training-sally
+
+$ curl -v -H "Content-Type:application/octet-stream" -X PUT --data-binary "@./data/pic.png" https://z4bf9rzv53.execute-api.ap-northeast-1.amazonaws.com/dev/training-sally
 ```
 
-### 2-4. POST to S3
+### 3-4. POST to S3
 ```
 $ curl -v -H "Content-Type:application/octet-stream" -X POST --data-binary "@<localfile_path>" <api_gateway_path>/dev/<bucket>/<key>
 ```
 
 ```
-$ curl -v -H "Content-Type:application/octet-stream" -X POST --data-binary "@./data/doc.pdf" https://w6jseteeib.execute-api.ap-northeast-1.amazonaws.com/dev/training-sally/doc.pdf
+$ curl -v -H "Content-Type:application/octet-stream" -X POST --data-binary "@./data/doc.pdf" https://z4bf9rzv53.execute-api.ap-northeast-1.amazonaws.com/dev/training-sally/doc.pdf
 
-$ curl -v -H "Content-Type:application/octet-stream" -X POST --data-binary "@./data/test.pdf.zip" https://w6jseteeib.execute-api.ap-northeast-1.amazonaws.com/dev/training-sally/test.pdf.zip
+$ curl -v -H "Content-Type:application/octet-stream" -X POST --data-binary "@./data/test.pdf.zip" https://z4bf9rzv53.execute-api.ap-northeast-1.amazonaws.com/dev/training-sally/test.pdf.zip
 
+$ curl -v -H "Content-Type:application/octet-stream" -X POST --data-binary "@./data/pic.png" https://z4bf9rzv53.execute-api.ap-northeast-1.amazonaws.com/dev/training-sally/pic.png
 ```
 
 
