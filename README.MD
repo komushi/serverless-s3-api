@@ -10,18 +10,13 @@
 ### 1-1. Install serverless
 frameworkVersion: ">=1.0.0 <2.0.0"
 ```
-npm install -g serverless
+$ npm install -g serverless
 ```
 
-### 1-2. aws credential configure
-*```$ aws configure --profile default```
+### 1-2. AWS credential configure
+* ```$ aws configure --profile default```
 * Make sure you have the specified profile which is used in serverless.yml
-*```cat ~/.aws/credentials```
-
-### 1-2. aws credential configure
-*```$ aws configure --profile default```
-* Make sure you have the specified profile which is used in serverless.yml
-*```cat ~/.aws/credentials```
+* ```$ cat ~/.aws/credentials```
 
 ## 2. Local Test
 ### 2-1. Start serverless offline mode
@@ -30,7 +25,10 @@ $ sls offline
 ```
 
 ### 2-2. GET from S3
-curl -v -H "Accept: application/octet-stream" http://localhost:3000/<bucket>/<key> | openssl base64 -A -d > <localfile_path>
+```
+$ curl -v -H "Accept: application/octet-stream" http://localhost:3000/<bucket>/<key> | openssl base64 -A -d > <localfile_path>
+```
+
 ```
 $ curl -v -H "Accept: application/octet-stream" http://localhost:3000/training-sally/1487366163793 | openssl base64 -A -d > test.pdf
 
@@ -38,7 +36,10 @@ $ curl -v -H "Accept: application/octet-stream" http://localhost:3000/training-s
 ```
 
 ### 2-3. PUT to S3
-curl -v -H "Content-Type:application/octet-stream" -X PUT --data-binary "@<localfile_path>" localhost:3000/<bucket>
+```
+$ curl -v -H "Content-Type:application/octet-stream" -X PUT --data-binary "@<localfile_path>" localhost:3000/<bucket>
+```
+
 ```
 $ curl -v -H "Content-Type:application/octet-stream" -X PUT --data-binary "@./data/doc.pdf" localhost:3000/training-sally
 
@@ -46,7 +47,10 @@ $ curl -v -H "Content-Type:application/octet-stream" -X PUT --data-binary "@./da
 ```
 
 ### 2-4. POST to S3
-curl -v -H "Content-Type:application/octet-stream" -X POST --data-binary "@<localfile_path>" localhost:3000/<bucket>/<key>
+```
+$ curl -v -H "Content-Type:application/octet-stream" -X POST --data-binary "@<localfile_path>" localhost:3000/<bucket>/<key>
+```
+
 ```
 $ curl -v -H "Content-Type:application/octet-stream" -X POST --data-binary "@./data/doc.pdf" localhost:3000/training-sally/doc.pdf
 
@@ -63,11 +67,14 @@ Need to add Binary support and re-deploy!
 * ```$ sls deploy```
 
 ### 3-2. GET from S3
-*```$ curl -v -H "Accept: application/octet-stream" https://w6jseteeib.execute-api.ap-northeast-1.amazonaws.com/dev/training-sally/doc.pdf -o 1487350952348.pdf```
+* ```$ curl -v -H "Accept: application/octet-stream" https://w6jseteeib.execute-api.ap-northeast-1.amazonaws.com/dev/training-sally/doc.pdf -o 1487350952348.pdf```
 * Or paste the url in browser directly.
 
 ### 3-3. PUT to S3
-curl -v -H "Content-Type:application/octet-stream" -X PUT --data-binary "@<localfile_path>" https://<api_gateway_path>/dev/<bucket>
+```
+$ curl -v -H "Content-Type:application/octet-stream" -X PUT --data-binary "@<localfile_path>" https://<api_gateway_path>/dev/<bucket>
+```
+
 ```
 $ curl -v -H "Content-Type:application/octet-stream" -X PUT --data-binary "@./data/doc.pdf" https://w6jseteeib.execute-api.ap-northeast-1.amazonaws.com/dev/training-sally
 
@@ -75,7 +82,10 @@ $ curl -v -H "Content-Type:application/octet-stream" -X PUT --data-binary "@./da
 ```
 
 ### 2-4. POST to S3
-curl -v -H "Content-Type:application/octet-stream" -X POST --data-binary "@<localfile_path>" <api_gateway_path>/dev/<bucket>/<key>
+```
+$ curl -v -H "Content-Type:application/octet-stream" -X POST --data-binary "@<localfile_path>" <api_gateway_path>/dev/<bucket>/<key>
+```
+
 ```
 $ curl -v -H "Content-Type:application/octet-stream" -X POST --data-binary "@./data/doc.pdf" https://w6jseteeib.execute-api.ap-northeast-1.amazonaws.com/dev/training-sally/doc.pdf
 
